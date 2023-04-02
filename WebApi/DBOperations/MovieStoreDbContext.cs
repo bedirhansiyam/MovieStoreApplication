@@ -11,6 +11,7 @@ public class MovieStoreDbContext : DbContext, IMovieStoreDbContext
     public DbSet<Director> Directors { get; set; }
     public DbSet<Movie> Movies { get; set; }
     public DbSet<Genre> Genres { get; set; }
+    public DbSet<MovieActor> MovieActors { get; set; }
 
     public int SaveChanges()
     {
