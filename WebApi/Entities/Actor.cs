@@ -2,7 +2,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApi.Entities;
 
-public class Actor : Director
+public class Actor
 {  
-    public List<Movie> MoviesActed { get; set; }
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Surname { get; set; }
+    public List<MovieActor> MovieActors { get; set; }
 }
