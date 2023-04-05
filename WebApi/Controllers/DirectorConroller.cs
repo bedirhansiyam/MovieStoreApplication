@@ -1,9 +1,14 @@
 using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Application.DirectorOperations.Commands.DeleteDirector;
+using WebApi.Application.DirectorOperations.Commands.UpdateDirector;
 using WebApi.Application.DirectorOperations.Queries.GetDirectorDetail;
 using WebApi.Application.DirectorOperations.Queries.GetDirectors;
 using WebApi.DBOperations;
+using WebApi.DirectorOperations.Commands.CreateDirector;
+using static WebApi.Application.DirectorOperations.Commands.UpdateDirector.UpdateDirectorCommand;
+using static WebApi.DirectorOperations.Commands.CreateDirector.CreateDirectorCommand;
 
 namespace WebApi.Controllers;
 
@@ -42,5 +47,48 @@ public class DirectorController : ControllerBase
         var result = query.Handle();
 
         return Ok(result);
+    }
+
+    [HttpPost]
+    public IActionResult AddDirector([FromBody] CreateDirectorModel newDirector)
+    {
+        CreateDirectorCommand command = new CreateDirectorCommand(_dbContext,_mapper);
+        command.Model = newDirector;
+
+        CreateDirectorCommandValidator validator = new CreateDirectorCommandValidator();
+        validator.ValidateAndThrow(command);
+
+        command.Handle();
+
+        return Ok();
+    }
+
+    [HttpPut("id")]
+    public IActionResult UpdateDirector([FromBody] UpdateDirectorModel updatedDirector, int id)
+    {
+        UpdateDirectorCommand command = new UpdateDirectorCommand(_mapper,_dbContext);
+        command.directorId = id;
+        command.Model = updatedDirector;
+
+        UpdateDirectorCommandValidator validator = new UpdateDirectorCommandValidator();
+        validator.ValidateAndThrow(command);
+
+        command.Handle();
+
+        return Ok();
+    }
+
+    [HttpDelete("id")]
+    public IActionResult DeleteDirector(int id)
+    {
+        DeleteDirectorCommand command = new DeleteDirectorCommand(_dbContext);
+        command.directorId = id;
+
+        DeleteDirectorCommandValidator validator = new DeleteDirectorCommandValidator();
+        validator.ValidateAndThrow(command);
+
+        command.Handle();
+
+        return Ok();
     }
 }

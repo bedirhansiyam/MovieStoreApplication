@@ -1,10 +1,12 @@
 using AutoMapper;
 using WebApi.Entities;
+using static WebApi.Application.DirectorOperations.Commands.UpdateDirector.UpdateDirectorCommand;
 using static WebApi.Application.DirectorOperations.Queries.GetDirectorDetail.GetDirectorDetailQuery;
 using static WebApi.Application.DirectorOperations.Queries.GetDirectors.GetDirectorsQuery;
 using static WebApi.Application.MovieOperations.Commands.CreateMovie.CreateMovieCommand;
 using static WebApi.Application.MovieOperations.Queries.GetMovieDetail.GetMovieDetailQuery;
 using static WebApi.Application.MovieOperations.Queries.GetMovies.GetMoviesQuery;
+using static WebApi.DirectorOperations.Commands.CreateDirector.CreateDirectorCommand;
 
 namespace WebApi.Common;
 
@@ -18,6 +20,9 @@ public class MappingProfile : Profile
 
         CreateMap<Director, DirectorsViewModel>().ForMember(dest => dest.Movies, opt => opt.MapFrom(src => src.MoviesDirected.Select(x => x.MovieName))); 
         CreateMap<Director, DirectorDetailViewModel>().ForMember(dest => dest.Movies, opt => opt.MapFrom(src => src.MoviesDirected.Select(x => x.MovieName))); 
+
+        CreateMap<CreateDirectorModel, Director>();
+        CreateMap<UpdateDirectorModel, Director>();
         
         CreateMap<CreateMovieModel, Movie>().ReverseMap();
 
