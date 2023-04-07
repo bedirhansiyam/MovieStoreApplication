@@ -2,6 +2,8 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using WebApi.DBOperations;
+using WebApi.Middlewares;
+using WebApi.Services;
 
 namespace WebApi;
 
@@ -20,6 +22,7 @@ public class Program
         builder.Services.AddDbContext<MovieStoreDbContext>(options => options.UseInMemoryDatabase(databaseName: "MovieStoreDB"));
         builder.Services.AddScoped<IMovieStoreDbContext>(provider => provider.GetService<MovieStoreDbContext>());
         builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        builder.Services.AddSingleton<ILoggerService, ConsoleLogger>();
 
         var app = builder.Build();
 
@@ -40,6 +43,7 @@ public class Program
 
         app.UseAuthorization();
 
+        app.UseCustomExceptionMiddle();
 
         app.MapControllers();
 
