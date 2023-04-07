@@ -16,7 +16,7 @@ public class DeleteDirectorCommand
     {
         var director = _dbContext.Directors.SingleOrDefault(x => x.Id == directorId);
         if(director is null)
-            throw new Exception("The director doesn't exist.");
+            throw new InvalidOperationException("The director doesn't exist.");
 
         _dbContext.Directors.Remove(director);
         _dbContext.SaveChanges();    

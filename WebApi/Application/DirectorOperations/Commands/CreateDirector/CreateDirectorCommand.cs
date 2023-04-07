@@ -18,7 +18,7 @@ public class CreateDirectorCommand
     {
         var director = _dbContext.Directors.SingleOrDefault(x => x.Name == Model.Name && x.Surname == Model.Surname);
         if(director is not null)
-            throw new Exception("The director already exist.");
+            throw new InvalidOperationException("The director already exist.");
 
         director = _mapper.Map<Director>(Model);
 

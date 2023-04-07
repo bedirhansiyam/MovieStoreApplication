@@ -21,7 +21,7 @@ public class UpdateDirectorCommand
     {
         var director = _dbContext.Directors.SingleOrDefault(x => x.Id == directorId);
         if(director is null)
-            throw new Exception("The director doesn't exist.");
+            throw new InvalidOperationException("The director doesn't exist.");
 
         _mapper.Map(Model, director);    
         _dbContext.SaveChanges();

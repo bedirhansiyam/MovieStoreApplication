@@ -19,7 +19,7 @@ public class UpdateActorCommand
     {
         var actor = _dbContext.Actors.SingleOrDefault(x => x.Id == ActorId);
         if(actor is null)
-            throw new Exception("The actor doesn't exist.");
+            throw new InvalidOperationException("The actor doesn't exist.");
         
         _mapper.Map(Model, actor);
         _dbContext.SaveChanges();

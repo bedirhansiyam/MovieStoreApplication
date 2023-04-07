@@ -20,7 +20,7 @@ public class GetActorDetailQuery
     {
         var actor = _dbContext.Actors.Include(x => x.MovieActors).ThenInclude(x => x.Movie).Where(x => x.Id == actorId).SingleOrDefault();
         if(actor is null)
-            throw new Exception("The actor doesn't exist");
+            throw new InvalidOperationException("The actor doesn't exist");
 
         var movies = _dbContext.MovieActors.Where(x => x.ActorId == actorId);
 

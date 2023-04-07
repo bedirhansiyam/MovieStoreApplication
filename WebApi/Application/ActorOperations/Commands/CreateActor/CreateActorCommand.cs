@@ -20,7 +20,7 @@ public class CreateActorCommand
     {
         var actor = _dbContext.Actors.SingleOrDefault(x => x.Name == Model.Name && x.Surname == Model.Surname);
         if(actor is not null)
-            throw new Exception("The actor already exist.");
+            throw new InvalidOperationException("The actor already exist.");
 
         actor = _mapper.Map<Actor>(Model);
 

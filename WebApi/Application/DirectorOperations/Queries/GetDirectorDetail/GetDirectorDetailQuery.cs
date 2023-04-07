@@ -20,7 +20,7 @@ public class GetDirectorDetailQuery
     {
         var director = _dbContext.Directors.Include(x => x.MoviesDirected).FirstOrDefault(x => x.Id == directorId);
         if(director is null)
-            throw new Exception("The director doesn't exist.");
+            throw new InvalidOperationException("The director doesn't exist.");
 
         var result = _mapper.Map<DirectorDetailViewModel>(director);
 
