@@ -8,6 +8,7 @@ using static WebApi.Application.DirectorOperations.Commands.UpdateDirector.Updat
 using static WebApi.Application.DirectorOperations.Queries.GetDirectorDetail.GetDirectorDetailQuery;
 using static WebApi.Application.DirectorOperations.Queries.GetDirectors.GetDirectorsQuery;
 using static WebApi.Application.MovieOperations.Commands.CreateMovie.CreateMovieCommand;
+using static WebApi.Application.MovieOperations.Commands.UpdateMovie.UpdateMovieCommand;
 using static WebApi.Application.MovieOperations.Queries.GetMovieDetail.GetMovieDetailQuery;
 using static WebApi.Application.MovieOperations.Queries.GetMovies.GetMoviesQuery;
 using static WebApi.DirectorOperations.Commands.CreateDirector.CreateDirectorCommand;
@@ -27,6 +28,7 @@ public class MappingProfile : Profile
         CreateMap<Director, DirectorDetailViewModel>().ForMember(dest => dest.Movies, opt => opt.MapFrom(src => src.MoviesDirected.Select(x => x.MovieName))); 
 
         CreateMap<CreateMovieModel, Movie>().ReverseMap();
+        CreateMap<UpdateMovieModel, Movie>().ReverseMap();
 
         CreateMap<CreateDirectorModel, Director>();
         CreateMap<UpdateDirectorModel, Director>();
