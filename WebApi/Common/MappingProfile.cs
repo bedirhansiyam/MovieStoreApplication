@@ -4,6 +4,7 @@ using static WebApi.Application.ActorOperations.Commands.CreateActor.CreateActor
 using static WebApi.Application.ActorOperations.Commands.UpdateActor.UpdateActorCommand;
 using static WebApi.Application.ActorOperations.Queries.GetActorDetail.GetActorDetailQuery;
 using static WebApi.Application.ActorOperations.Queries.GetActors.GetActorsQuery;
+using static WebApi.Application.CustomerOperations.Commands.CreateCustomer.CreateCustomerCommand;
 using static WebApi.Application.DirectorOperations.Commands.UpdateDirector.UpdateDirectorCommand;
 using static WebApi.Application.DirectorOperations.Queries.GetDirectorDetail.GetDirectorDetailQuery;
 using static WebApi.Application.DirectorOperations.Queries.GetDirectors.GetDirectorsQuery;
@@ -40,6 +41,8 @@ public class MappingProfile : Profile
         CreateMap<CreateActorModel, Actor>();
 
         CreateMap<UpdateActorModel, Actor>();
+
+        CreateMap<CreateCustomerModel, Customer>();
         
 
     }

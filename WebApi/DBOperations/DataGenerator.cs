@@ -114,7 +114,38 @@ public class DataGenerator
                     new MovieActor{ActorId = 6, MovieId = 4},
                     new MovieActor{ActorId = 7, MovieId = 4});
             }
-            context.SaveChanges();            
+            context.SaveChanges();   
+
+            if(context.Customers.Any())
+            {
+                return;
+            }         
+            else
+            {
+                context.Customers.AddRange(
+                    new Customer
+                    {
+                        Name = "Baltasar", 
+                        Surname = "Robert", 
+                        Email = "balt@mail.com",
+                        Password = "123456789",
+                    },
+                    new Customer
+                    {
+                        Name = "Jennifer", 
+                        Surname = "Brian", 
+                        Email = "jenn@mail.com",
+                        Password = "123456789",
+                    },
+                    new Customer
+                    {
+                        Name = "Isabeau", 
+                        Surname = "Oluf", 
+                        Email = "oluf@mail.com",
+                        Password = "123456789",
+                    });
+            }
+            context.SaveChanges();   
         }
     }
 }
