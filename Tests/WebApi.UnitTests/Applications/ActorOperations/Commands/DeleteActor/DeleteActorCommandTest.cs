@@ -44,4 +44,20 @@ public class DeleteActorCommandTest: IClassFixture<CommonTestFixture>
 
         FluentActions.Invoking(() => command.Handle()).Should().Throw<InvalidOperationException>().And.Message.Should().Be("The actor has movie/s. To delete the actor you must first delete the actor's movie/s.");
     }
+
+    [Fact]
+    public void WhenValidInputsAreGivenInDelete_InvalidOperationException_ShouldNotBeReturn()
+    {
+        var actor = new Actor(){Name = "TestName10", Surname = "TestSurname10"};
+        _context.Actors.Add(actor);
+        _context.SaveChanges();
+
+        DeleteActorCommand command = new DeleteActorCommand(_context);
+        command.ActorId = actor.Id;
+
+        FluentActions.Invoking(() => command.Handle()).Invoke();
+
+        var result = _context.Directors.SingleOrDefault(x => x.Id == actor.Id);
+        result.Should().BeNull();
+    }
 }
