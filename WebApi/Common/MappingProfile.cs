@@ -12,6 +12,10 @@ using static WebApi.Application.MovieOperations.Commands.CreateMovie.CreateMovie
 using static WebApi.Application.MovieOperations.Commands.UpdateMovie.UpdateMovieCommand;
 using static WebApi.Application.MovieOperations.Queries.GetMovieDetail.GetMovieDetailQuery;
 using static WebApi.Application.MovieOperations.Queries.GetMovies.GetMoviesQuery;
+using static WebApi.Application.OrderOperations.Commands.CreateOrder.CreateOrderCommand;
+using static WebApi.Application.OrderOperations.Queries.GetOrderDetail.GetOrderDetailQuery;
+using static WebApi.Application.OrderOperations.Queries.GetOrderDetailByCustomer.GetOrderDetailByCustomerQuery;
+using static WebApi.Application.OrderOperations.Queries.GetOrders.GetOrderQuery;
 using static WebApi.DirectorOperations.Commands.CreateDirector.CreateDirectorCommand;
 
 namespace WebApi.Common;
@@ -43,6 +47,14 @@ public class MappingProfile : Profile
         CreateMap<UpdateActorModel, Actor>();
 
         CreateMap<CreateCustomerModel, Customer>();
+
+        CreateMap<CreateOrderModel, Order>();
+
+        CreateMap<Order, OrderViewModel>().ForMember(dest => dest.MovieName, opt => opt.MapFrom(src => src.Movie.MovieName)).ForMember(dest => dest.CustomerName, opt => opt.MapFrom(src => src.Customer.Name + " " + src.Customer.Surname));
+
+        CreateMap<Order, OrderDetailByCustomerViewModel>().ForMember(dest => dest.MovieName, opt => opt.MapFrom(src => src.Movie.MovieName));
+
+        CreateMap<Order, OrderDetailViewModel>().ForMember(dest => dest.MovieName, opt => opt.MapFrom(src => src.Movie.MovieName)).ForMember(dest => dest.CustomerName, opt => opt.MapFrom(src => src.Customer.Name + " " + src.Customer.Surname));
         
 
     }

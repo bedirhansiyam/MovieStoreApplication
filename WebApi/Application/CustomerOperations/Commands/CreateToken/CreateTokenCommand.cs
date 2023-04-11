@@ -30,6 +30,7 @@ public class CreateTokenCommand
 
         customer.RefreshToken = token.RefreshToken;
         customer.RefreshTokenExpireDate = token.ExpirationDate.AddMinutes(5);
+        LoginCustomer.loginCustomer = customer;
         _dbContext.SaveChanges();
 
         return token;

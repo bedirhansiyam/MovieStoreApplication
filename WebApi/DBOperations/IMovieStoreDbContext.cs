@@ -11,6 +11,7 @@ public interface IMovieStoreDbContext
     DbSet<Genre> Genres { get; set; }
     DbSet<MovieActor> MovieActors { get; set; }
     DbSet<Customer> Customers { get; set; }
+    DbSet<Order> Orders { get; set; }
 
     int SaveChanges();
 }
