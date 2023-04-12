@@ -7,7 +7,7 @@ namespace Applications.ActorOperations.Commands.DeleteActor;
 public class DeleteActorCommandValidatorTest: IClassFixture<CommonTestFixture>
 {
     [Fact]
-    public void WhenInvalidActorIdIsGivenDelete_InvalidOperationException_ShouldReturnErrors()
+    public void WhenInvalidActorIdIsGiven_DeleteActorValidator_ShouldReturnErrors()
     {
         DeleteActorCommand command = new DeleteActorCommand(null);
         command.ActorId = -1;
@@ -19,7 +19,7 @@ public class DeleteActorCommandValidatorTest: IClassFixture<CommonTestFixture>
     }
 
     [Fact]
-    public void WhenValidActorIdIsGivenUpdate_InvalidOperationException_ShouldNotBeReturnError()
+    public void WhenValidActorIdIsGiven_DeleteActorValidator_ShouldNotBeReturnError()
     {
         DeleteActorCommand command = new DeleteActorCommand(null);
         command.ActorId = 1;
